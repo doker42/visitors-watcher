@@ -1,0 +1,20 @@
+{
+  "name": "doker42/visitors-watcher",
+  "description": "landing-visitors-watcher",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "doker",
+      "email": "doker42@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Doker42\\VisitorsWatcher\\": "src"
+    }
+  }
+}
