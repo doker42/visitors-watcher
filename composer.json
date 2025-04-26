@@ -16,5 +16,12 @@
     "psr-4": {
       "Doker42\\VisitorsWatcher\\": "src"
     }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Doker42\\VisitorsWatcher\\VisitorsWatcherServiceProvider"
+      ]
+    }
   }
 }
