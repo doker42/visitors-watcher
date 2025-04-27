@@ -53,7 +53,7 @@ class VisitorMiddleware
         return [
             'ip'     => $request->getClientIp(),
             'url'    => $request->getRequestUri(),
-            'path'   => '/' . $request->path(),
+            'path'   => $request->path(),
             'method' => $request->method(),
             'agent'  => strtolower($request->userAgent() ?? ''),
         ];
