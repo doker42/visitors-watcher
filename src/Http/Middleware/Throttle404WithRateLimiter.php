@@ -19,14 +19,14 @@ class Throttle404WithRateLimiter
         $ip = $request->ip();
         $key = "404:ip:{$ip}";
 
-        if (RateLimiter::tooManyAttempts($key, 5)) {
+        if (RateLimiter::tooManyAttempts($key, config('visitors.middleware.throttle_404_with_limit.attempts'))) {
             return response('Access blocked due to too many 404 errors.', Response::HTTP_FORBIDDEN);
         }
 
         $response = $next($request);
 
         if ($response->getStatusCode() === Response::HTTP_NOT_FOUND) {
-            RateLimiter::hit($key, 3600);
+            RateLimiter::hit($key, config('visitors.middleware.throttle_404_with_limit.sleep_time'));
         }
 
         return $response;

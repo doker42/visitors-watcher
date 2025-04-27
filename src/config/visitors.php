@@ -4,9 +4,20 @@ return [
 
     'admin_prefix' => env('ADMIN_PREFIX', 'adm'),
 
-    'throttle' => [
-        'attempts' => 20,
-        'sleep_time' => 60 * 1,
+    'middleware' => [
+        'visitors' => [
+            'enabled' => true,
+        ],
+        'throttle_404' => [
+            'enabled' => false,
+            'attempts' => 20,
+            'sleep_time' => 60 * 1,
+        ],
+        'throttle_404_with_limit' => [
+            'enabled' => false,
+            'attempts' => 10,
+            'sleep_time' => 60 * 60,
+        ],
     ],
 
     'bad_request' => [

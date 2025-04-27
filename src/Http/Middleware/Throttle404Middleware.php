@@ -27,8 +27,8 @@ class Throttle404Middleware
 
         $attempts = Cache::get($key, 0);
 
-        if ($attempts >= config('visitors.throttle.attempts')) {
-            sleep(60 * 15);
+        if ($attempts >= config('visitors.middleware.throttle_404.attempts')) {
+            sleep(config('visitors.middleware.throttle_404.sleep_time'));
         }
 
         $response = $next($request);
