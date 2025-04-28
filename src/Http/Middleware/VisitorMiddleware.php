@@ -6,6 +6,7 @@ use Closure;
 use Doker42\VisitorsWatcher\Jobs\HandleRequest;
 use Doker42\VisitorsWatcher\Models\Visitor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,9 +30,12 @@ class VisitorMiddleware
             abort(404);
         }
 
+        $badPaths  = Config::get('visitors.bad_paths');
+        $badAgents = Config::get('visitors.bad_agents');
+
         if (
-            collect(config('admin.bad_agents'))->first(fn($agent) => str_contains($data['agent'], $agent)) ||
-            collect(config('admin.bad_paths'))->first(fn($segment) => str_contains($data['path'], $segment))
+            collect($badAgents)->first(fn($agent) => str_contains($data['agent'], $agent)) ||
+            collect($badPaths)->first(fn($segment) => str_contains($data['path'], $segment))
         ) {
             sleep(config('visitors.bad_request.sleep_time'));
             return response('Access Denied', 418)
