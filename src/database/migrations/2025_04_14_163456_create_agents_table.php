@@ -15,7 +15,7 @@ return new class extends Migration
         if (!Schema::hasTable('agents')) {
             Schema::create('agents', function (Blueprint $table) {
                 $table->id();
-                $table->string('name');
+                $table->text('name');
                 $table->foreignIdFor(Visitor::class)->constrained()->cascadeOnDelete();
                 $table->timestamps();
             });
